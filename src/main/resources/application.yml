@@ -1,0 +1,9 @@
+server:
+  port: 9000
+
+selenium:
+  font: "font-family: 'Segoe UI Emoji', 'Input Mono', 'FOT-TsukuARdGothic Std';"
+
+spring:
+  profiles:
+    active: dev
