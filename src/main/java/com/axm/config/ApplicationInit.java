@@ -1,5 +1,6 @@
 package com.axm.config;
 
+import com.axm.service.DuolingoService;
 import com.axm.service.SitePreviewService;
 import com.axm.utils.PreviewUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -19,12 +20,14 @@ public class ApplicationInit implements CommandLineRunner {
     @Autowired
     private SitePreviewService driverConfig;
 
+    @Autowired
+    private DuolingoService duolingoService;
+
     @Override
     public void run(String... args) {
         log.info("load chrome driver 😎");
         driverConfig.init();
-//        log.info("preview init 😎");
-//        PreviewUtil.previewInit();
+        duolingoService.syncProfile();
     }
 
 }

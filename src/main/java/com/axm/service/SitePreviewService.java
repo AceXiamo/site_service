@@ -1,5 +1,6 @@
 package com.axm.service;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.thread.ThreadUtil;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Dimension;
@@ -21,8 +22,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class SitePreviewService {
 
+    /**
+     * The Web driver.
+     */
     private WebDriver webDriver;
 
+    /**
+     * The Font.
+     */
     @Value("${selenium.font}")
     private String font;
 
@@ -56,4 +63,18 @@ public class SitePreviewService {
         return screenshot.getScreenshotAs(OutputType.BYTES);
     }
 
+
+    /**
+     * Dolingo byte [ ].
+     *
+     * @param path the path
+     * @return the byte [ ]
+     */
+    public byte[] staticFile(String path) {
+        webDriver.get("file://" + path);
+        webDriver.manage().window().setSize(new Dimension(235, 140));
+        ThreadUtil.sleep(1000);
+        TakesScreenshot screenshot = ((TakesScreenshot) webDriver);
+        return screenshot.getScreenshotAs(OutputType.BYTES);
+    }
 }
